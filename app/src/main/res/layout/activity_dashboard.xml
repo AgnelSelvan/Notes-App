@@ -7,15 +7,13 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".DashboardActivity">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_20ssp"
-        android:text="@string/app_name"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:textColor="@color/white"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_layout"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
     />
 
