@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Notes</string>
+    <string name="app_name">My Notes</string>
     <string name="sign_in_with_google">Sign In With Google</string>
     <string name="example">Notes</string>
     <string name="id">ID</string>
