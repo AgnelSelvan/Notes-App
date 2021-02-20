@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 import com.agnelselvan.myapplication.Models.Notes
+import kotlinx.android.synthetic.main.fragment_create_note.*
 
 val DB_NAME = "MyNotes"
 val NOTES_TABLE_NAME = "Notes"
@@ -56,6 +57,22 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DB_NAME,
         }else{
             Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    fun readNotes() : MutableList<Notes>{
+        var notesList: MutableList<Notes> = ArrayList()
+        val db = this.readableDatabase
+        val query = "SELECT * FROM " + NOTES_TABLE_NAME
+        val result = db.rawQuery(query, null)
+
+        if(result.moveToFirst()){
+            do {
+                var notes = Notes( result.getInt(result.getColumnIndex(ID)) , result.getString(result.getColumnIndex(TITLE)), result.getString(result.getColumnIndex(SUB_TITLE)), result.getString(result.getColumnIndex(DATE_TIME)), result.getString(result.getColumnIndex(NOTE_TEXT)), result.getString(result.getColumnIndex(IMG_PATH)), result.getString(result.getColumnIndex(WEB_LINK)), result.getString(result.getColumnIndex(COLOR))  )
+                notesList.add(notes)
+            }while(result.moveToNext())
+        }
+
+        return notesList
     }
 
 }
