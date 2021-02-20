@@ -13,11 +13,8 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        fabBtnCreateNote.setOnClickListener{
-            replaceFragment(CreateNoteFragment.newInstance(), true);
 
-        }
-//        replaceFragment(HomeFragment.newInstance(), true)
+        replaceFragment(HomeFragment.newInstance(), true)
     }
 
     private fun replaceFragment(fragment: Fragment, isTransition: Boolean ){
