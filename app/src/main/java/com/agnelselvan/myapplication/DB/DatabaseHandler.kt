@@ -33,7 +33,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DB_NAME,
                 NOTE_TEXT + " VARCHAR(256), "+
                 IMG_PATH + " VARCHAR(256), "+
                 WEB_LINK + " VARCHAR(256), "+
-                COLOR + " VARCHAR(256), ";
+                COLOR + " VARCHAR(256)) ";
         db?.execSQL(createNotesTable)
     }
 
@@ -59,8 +59,8 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DB_NAME,
         }
     }
 
-    fun readNotes() : MutableList<Notes>{
-        var notesList: MutableList<Notes> = ArrayList()
+    fun readNotes() : ArrayList<Notes>{
+        var notesList: ArrayList<Notes> = ArrayList()
         val db = this.readableDatabase
         val query = "SELECT * FROM " + NOTES_TABLE_NAME
         val result = db.rawQuery(query, null)
