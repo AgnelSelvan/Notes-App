@@ -58,7 +58,7 @@ class CreateNoteFragment : BaseFragment() {
                 BroadcastReceiver, IntentFilter("bottom_sheet_action")
         )
 
-        val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
         currentDate = sdf.format(Date())
         tvDateTime.text = currentDate
 

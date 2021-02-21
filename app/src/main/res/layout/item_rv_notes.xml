@@ -32,6 +32,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:fontFamily="@font/manrope_bold"
                 android:textColor="@color/ColorWhite"/>
+            <TextView
+                android:id="@+id/tvWebUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:textColorLink="@color/ColorBlue"
+                android:autoLink="web"
+                android:textColorHint="@color/ColorBlue"
+                android:visibility="gone"
+                android:paddingTop="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/manrope_bold"
+                android:textColor="@color/ColorWhite"/>
 
             <TextView
                 android:id="@+id/tvDesc"

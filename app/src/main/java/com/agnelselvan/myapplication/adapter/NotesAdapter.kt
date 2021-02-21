@@ -9,7 +9,12 @@ import com.agnelselvan.myapplication.Models.Notes
 import com.agnelselvan.myapplication.R
 import kotlinx.android.synthetic.main.item_rv_notes.view.*
 
-class NotesAdapter(val arrList: ArrayList<Notes>) : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
+class NotesAdapter() : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
+    var arrList = ArrayList<Notes>()
+
+    fun setData(arrNotesList: List<Notes>){
+        arrList = arrNotesList as ArrayList<Notes>
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         return NotesViewHolder(
@@ -29,6 +34,13 @@ class NotesAdapter(val arrList: ArrayList<Notes>) : RecyclerView.Adapter<NotesAd
 //        else{
 //            holder.itemView.notesCardView.setCardBackgroundColor(Color.parseColor(R.color.ColorLightBlack.toString()))
 //        }
+        if(arrList[position].webLink == "" || arrList[position].webLink == null ){
+            holder.itemView.tvWebUrl.visibility = View.GONE
+        }
+        else{
+            holder.itemView.tvWebUrl.text = arrList[position].webLink
+            holder.itemView.tvWebUrl.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount(): Int {
