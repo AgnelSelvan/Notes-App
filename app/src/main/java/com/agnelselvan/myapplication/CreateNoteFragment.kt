@@ -1,6 +1,10 @@
 package com.agnelselvan.myapplication
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +13,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.agnelselvan.myapplication.DB.DatabaseHandler
 import com.agnelselvan.myapplication.Models.Notes
+import com.agnelselvan.myapplication.utils.NoteBottomSheetFragment
 import kotlinx.android.synthetic.main.fragment_create_note.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -18,6 +24,7 @@ import java.util.*
 
 class CreateNoteFragment : BaseFragment() {
     var currentDate: String? = null
+    var selectedColor: String? = "#171C26"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +51,26 @@ class CreateNoteFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
+                BroadcastReceiver, IntentFilter("bottom_sheet_action")
+        )
+
         val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
         currentDate = sdf.format(Date())
         tvDateTime.text = currentDate
+
+        colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
         imgDone.setOnClickListener{
             saveNote()
         }
         imgBack.setOnClickListener{
-            replaceFragment(HomeFragment.newInstance(), true)
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
+        imgMore.setOnClickListener{
+            var noteBottomSheetFragment = NoteBottomSheetFragment.newInstance()
+            noteBottomSheetFragment.show(requireActivity().supportFragmentManager, "Note Bottom Sheet Fragment")
         }
     }
 
@@ -68,9 +87,20 @@ class CreateNoteFragment : BaseFragment() {
         else{
             val context: Context = this.requireContext();
             launch {
-                var notes = Notes(noteTitle.text.toString(), noteSubTitle.text.toString(), currentDate.toString(), noteDesc.text.toString(), "", "", ""  );
+                var notes = Notes();
+                notes.title = noteTitle.text.toString()
+                notes.subTitle = noteSubTitle.text.toString()
+                notes.datetime = currentDate.toString()
+                notes.noteText = noteDesc.text.toString()
+                notes.color = selectedColor
                 var db = DatabaseHandler(context)
-                db?.insertNote(notes)
+                notes?.let {
+                    db?.insertNote(it)
+                    noteTitle.setText("")
+                    noteSubTitle.setText("")
+                    noteDesc.setText("")
+                }
+
             }
         }
     }
@@ -86,4 +116,56 @@ class CreateNoteFragment : BaseFragment() {
         fragmentTransition.commit()
 
     }
+
+    private val BroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            var actionColor = intent!!.getStringExtra("actionColor")
+            when (actionColor!!){
+                "Blue" -> {
+                    selectedColor = intent.getStringExtra("selectedColor")
+                    colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                }
+                "Yellow" -> {
+                    selectedColor = intent.getStringExtra("selectedColor")
+                    colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                }
+
+                "Purple" -> {
+                    selectedColor = intent.getStringExtra("selectedColor")
+                    colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                }
+
+                "Orange" -> {
+                    selectedColor = intent.getStringExtra("selectedColor")
+                    colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                }
+
+                "Green" -> {
+                    selectedColor = intent.getStringExtra("selectedColor")
+                    colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                }
+                else -> {
+                    selectedColor = intent.getStringExtra("selectedColor")
+                    colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                }
+
+            }
+        }
+
+    }
+
+
+    override fun onDestroy() {
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(BroadcastReceiver)
+        super.onDestroy()
+    }
+
 }
+
+
+
+
+
+
+
+

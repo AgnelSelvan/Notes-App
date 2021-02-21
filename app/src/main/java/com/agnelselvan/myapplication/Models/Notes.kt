@@ -32,5 +32,7 @@ class Notes {
         this.color = color
     }
 
+    constructor(){}
+
     
 }
