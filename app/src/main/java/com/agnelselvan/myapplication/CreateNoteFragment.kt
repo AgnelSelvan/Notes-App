@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +27,7 @@ import java.util.*
 class CreateNoteFragment : BaseFragment() {
     var currentDate: String? = null
     var selectedColor: String? = "#171C26"
+    private var webUrl = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +75,22 @@ class CreateNoteFragment : BaseFragment() {
             var noteBottomSheetFragment = NoteBottomSheetFragment.newInstance()
             noteBottomSheetFragment.show(requireActivity().supportFragmentManager, "Note Bottom Sheet Fragment")
         }
+        okayBtn.setOnClickListener{
+            if(noteWebUrl.text.toString().trim().isNotBlank()){
+                checkWebUrl()
+            }
+            else{
+                Toast.makeText(requireContext(), "Url is required", Toast.LENGTH_SHORT).show()
+            }
+        }
+        cancelBtn.setOnClickListener{
+            layoutWebUrl.visibility = View.GONE
+        }
+
+        tvWebUrl.setOnClickListener{
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(noteWebUrl.text.toString()))
+            startActivity(intent)
+        }
     }
 
     private fun saveNote(){
@@ -93,12 +112,15 @@ class CreateNoteFragment : BaseFragment() {
                 notes.datetime = currentDate.toString()
                 notes.noteText = noteDesc.text.toString()
                 notes.color = selectedColor
+                notes.webLink = webUrl
                 var db = DatabaseHandler(context)
                 notes?.let {
                     db?.insertNote(it)
                     noteTitle.setText("")
                     noteSubTitle.setText("")
                     noteDesc.setText("")
+                    tvWebUrl.visibility = View.GONE
+                    requireActivity().supportFragmentManager.popBackStack()
                 }
 
             }
@@ -119,7 +141,7 @@ class CreateNoteFragment : BaseFragment() {
 
     private val BroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            var actionColor = intent!!.getStringExtra("actionColor")
+            var actionColor = intent!!.getStringExtra("action")
             when (actionColor!!){
                 "Blue" -> {
                     selectedColor = intent.getStringExtra("selectedColor")
@@ -144,7 +166,11 @@ class CreateNoteFragment : BaseFragment() {
                     selectedColor = intent.getStringExtra("selectedColor")
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
                 }
+                "WebUrl" -> {
+                    layoutWebUrl.visibility = View.VISIBLE
+                }
                 else -> {
+                    layoutWebUrl.visibility = View.VISIBLE
                     selectedColor = intent.getStringExtra("selectedColor")
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
                 }
@@ -152,6 +178,19 @@ class CreateNoteFragment : BaseFragment() {
             }
         }
 
+    }
+
+    private fun checkWebUrl(){
+        if(Patterns.WEB_URL.matcher(noteWebUrl.text.toString()).matches()){
+            layoutWebUrl.visibility = View.GONE
+            noteWebUrl.isEnabled = false
+            webUrl = noteWebUrl.text.toString()
+            tvWebUrl.visibility = View.VISIBLE
+            tvWebUrl.setText(webUrl.toString())
+        }
+        else{
+            Toast.makeText(requireContext(), "Url is not valid", Toast.LENGTH_SHORT ).show()
+        }
     }
 
 

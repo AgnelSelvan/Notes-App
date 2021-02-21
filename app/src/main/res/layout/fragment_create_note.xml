@@ -116,6 +116,80 @@
         android:id="@+id/noteDesc"
     />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWebUrl"
+        android:paddingStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/ColorGreenNote"
+        android:textSize="@dimen/_10sdp"
+        android:fontFamily="@font/manrope_regular"
+        app:layout_constraintTop_toBottomOf="@+id/noteDesc"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvWebUrl"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/_10sdp"
+        android:padding="@dimen/_5sdp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/layoutWebUrl"
+        android:visibility="gone"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:hint="Enter Web Url"
+            android:inputType="text"
+            android:textSize="@dimen/_12sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:fontFamily="@font/manrope_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:ellipsize="end"
+            android:text="http://"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:id="@+id/noteWebUrl"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:layout_marginEnd="@dimen/_10sdp"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancelBtn"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="@color/ColorWhite"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/cancel"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/okayBtn"
+                android:textColor="@color/ColorWhite"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/okay"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
     <FrameLayout
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
