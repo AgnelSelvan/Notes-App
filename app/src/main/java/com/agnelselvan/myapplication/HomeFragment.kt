@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.fragment_create_note.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(){
+    var notesAdapter: NotesAdapter = NotesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +45,27 @@ class HomeFragment : BaseFragment() {
         launch {
             var db = context?.let { DatabaseHandler(it) }
             var notes: ArrayList<Notes>? = db?.readNotes()
-            recycler_view.adapter = notes?.let { NotesAdapter(it) }
+            if (notes != null) {
+                notesAdapter!!.setData(notes)
+                recycler_view.adapter = notesAdapter
+            }
+
         }
+        notesAdapter!!.setOnClickListener(onClicked)
         fabBtnCreateNote.setOnClickListener{
-            replaceFragment( CreateNoteFragment.newInstance(), true )
+            replaceFragment( CreateNoteFragment.newInstance(), false )
+        }
+    }
+
+    private val onClicked = object: NotesAdapter.OnItemClickListener{
+        override fun onClicked(notesModel: Notes) {
+            var fragment: Fragment
+            var bundle = Bundle()
+            bundle.putString("edit", "isEdit")
+            bundle.putInt("noteId", notesModel.id!!)
+            fragment = CreateNoteFragment.newInstance()
+            fragment.arguments = bundle
+            replaceFragment(fragment, false)
         }
     }
 

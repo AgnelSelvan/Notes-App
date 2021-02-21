@@ -20,6 +20,7 @@ import com.agnelselvan.myapplication.DB.DatabaseHandler
 import com.agnelselvan.myapplication.Models.Notes
 import com.agnelselvan.myapplication.utils.NoteBottomSheetFragment
 import kotlinx.android.synthetic.main.fragment_create_note.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,12 +29,11 @@ class CreateNoteFragment : BaseFragment() {
     var currentDate: String? = null
     var selectedColor: String? = "#171C26"
     private var webUrl = ""
+    private var noteId = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let{
-
-        }
+        noteId = requireArguments().getInt("noteId", -1)!!
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +54,29 @@ class CreateNoteFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(noteId != -1){
+            launch {
+                var db = context?.let { DatabaseHandler(it) }
+                var notes: Notes? = db?.getNoteById(noteId)
+                if (notes != null) {
+                    selectedColor = notes.color
+                    webUrl = notes.webLink.toString()
+                    noteTitle.setText(notes.title)
+                    colorView.setBackgroundColor(Color.parseColor(notes.color))
+                    noteSubTitle.setText(notes.subTitle)
+                    noteDesc.setText(notes.noteText)
+                    if(notes.webLink != "" || notes.webLink != null){
+                        tvWebUrl.text = notes.webLink
+                        tvWebUrl.visibility = View.VISIBLE
+                    }
+                    else{
+                        tvWebUrl.visibility = View.GONE
+                    }
+                }
+
+            }
+        }
+
         LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
                 BroadcastReceiver, IntentFilter("bottom_sheet_action")
         )
@@ -65,7 +88,12 @@ class CreateNoteFragment : BaseFragment() {
         colorView.setBackgroundColor(Color.parseColor(selectedColor))
 
         imgDone.setOnClickListener{
-            saveNote()
+            if(noteId != -1){
+                updateNote()
+            }
+            else{
+                saveNote()
+            }
         }
         imgBack.setOnClickListener{
             requireActivity().supportFragmentManager.popBackStack()
@@ -90,6 +118,41 @@ class CreateNoteFragment : BaseFragment() {
         tvWebUrl.setOnClickListener{
             var intent = Intent(Intent.ACTION_VIEW, Uri.parse(noteWebUrl.text.toString()))
             startActivity(intent)
+        }
+    }
+
+    private fun updateNote(){
+        if(noteTitle.text.isNullOrEmpty()){
+            Toast.makeText(context, "Title Required", Toast.LENGTH_SHORT).show()
+        }
+        else if(noteSubTitle.text.isNullOrEmpty()){
+            Toast.makeText(context, "Sub Title Required", Toast.LENGTH_SHORT).show()
+        }
+        else if(noteDesc.text.isNullOrEmpty()){
+            Toast.makeText(context, "Note Required", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            val context: Context = this.requireContext();
+            launch {
+                var notes = Notes();
+                notes.id = noteId
+                notes.title = noteTitle.text.toString()
+                notes.subTitle = noteSubTitle.text.toString()
+                notes.datetime = currentDate.toString()
+                notes.noteText = noteDesc.text.toString()
+                notes.color = selectedColor
+                notes.webLink = webUrl
+                var db = DatabaseHandler(context)
+                notes?.let {
+                    db?.updateNote(it)
+                    noteTitle.setText("")
+                    noteSubTitle.setText("")
+                    noteDesc.setText("")
+                    tvWebUrl.visibility = View.GONE
+                    requireActivity().supportFragmentManager.popBackStack()
+                }
+
+            }
         }
     }
 

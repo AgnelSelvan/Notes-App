@@ -10,10 +10,15 @@ import com.agnelselvan.myapplication.R
 import kotlinx.android.synthetic.main.item_rv_notes.view.*
 
 class NotesAdapter() : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
+    var listener:OnItemClickListener? = null
     var arrList = ArrayList<Notes>()
 
     fun setData(arrNotesList: List<Notes>){
         arrList = arrNotesList as ArrayList<Notes>
+    }
+
+    fun setOnClickListener(listener1 : OnItemClickListener){
+        listener = listener1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
@@ -41,6 +46,12 @@ class NotesAdapter() : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
             holder.itemView.tvWebUrl.text = arrList[position].webLink
             holder.itemView.tvWebUrl.visibility = View.VISIBLE
         }
+
+        holder.itemView.notesCardView.setOnClickListener {
+            listener!!.onClicked(arrList[position])
+
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -50,6 +61,11 @@ class NotesAdapter() : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
 
     class NotesViewHolder(view: View): RecyclerView.ViewHolder(view){
 
+    }
+
+    interface OnItemClickListener{
+        fun onClicked(notesModel: Notes){}
+        
     }
 
 }

@@ -75,4 +75,38 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DB_NAME,
         return notesList
     }
 
+    fun getNoteById(noteId: Int ):Notes{
+        val db = this.readableDatabase
+        val query = "SELECT * FROM " + NOTES_TABLE_NAME + " WHERE id="+noteId
+        val result = db.rawQuery(query, null)
+
+        var notes = Notes()
+        if(result.moveToFirst()){
+            do {
+                notes = Notes( result.getInt(result.getColumnIndex(ID)) , result.getString(result.getColumnIndex(TITLE)), result.getString(result.getColumnIndex(SUB_TITLE)), result.getString(result.getColumnIndex(DATE_TIME)), result.getString(result.getColumnIndex(NOTE_TEXT)), result.getString(result.getColumnIndex(IMG_PATH)), result.getString(result.getColumnIndex(WEB_LINK)), result.getString(result.getColumnIndex(COLOR))  )
+
+            }while(result.moveToNext())
+        }
+        return notes
+    }
+
+    fun updateNote(notes: Notes) {
+        val db = this.writableDatabase;
+        var cv = ContentValues()
+        cv.put(TITLE, notes.title)
+        cv.put(SUB_TITLE, notes.subTitle)
+        cv.put(DATE_TIME, notes.datetime)
+        cv.put(NOTE_TEXT, notes.noteText)
+        cv.put(IMG_PATH, notes.imgPath)
+        cv.put(WEB_LINK, notes.webLink)
+        cv.put(COLOR, notes.color)
+        db.update(NOTES_TABLE_NAME,cv,ID + "=? ",
+                arrayOf(notes.id.toString(),))
+
+        Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+
+//        result.close()
+//        db.close()
+    }
+
 }
