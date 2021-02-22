@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="@id/rl1"
             android:layout_margin="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@id/rl1"
-            app:tint="@color/ColorLightBlack" />
+            app:tint="@color/ColorYellow" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

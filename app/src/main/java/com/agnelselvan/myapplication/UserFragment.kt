@@ -52,52 +52,27 @@ class UserFragment : Fragment() {
 //
 //            ivUserImage.setImageBitmap(bitmap)
 //        }
-        DownloadImageFromInternet(ivUserImage).execute(user?.photoUrl.toString())
+//        DownloadImageFromInternet(ivUserImage).execute(user?.photoUrl.toString())
         Log.e("src", user?.photoUrl.toString())
+        imgLogout.setOnClickListener {
+            mAuth.signOut()
+            requireActivity().supportFragmentManager.popBackStack()
+
+        }
         tvUserName.setText(user?.displayName)
         tvUserEmail.setText(user?.email)
     }
 
-    @SuppressLint("StaticFieldLeak")
-    @Suppress("DEPRECATION")
-    private inner class DownloadImageFromInternet(var imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
-        init {
-            Toast.makeText(context, "Please wait, it may take a few minute...",     Toast.LENGTH_SHORT).show()
-        }
-        override fun doInBackground(vararg urls: String): Bitmap? {
-            val imageURL = urls[0]
-            var image: Bitmap? = null
-            try {
-                val `in` = java.net.URL(imageURL).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-            }
-            catch (e: Exception) {
-                Log.e("Error Message", e.message.toString())
-                e.printStackTrace()
-            }
-            return image
-        }
-        override fun onPostExecute(result: Bitmap?) {
-            imageView.setImageBitmap(result)
-        }
-    }
+    private fun replaceFragment(fragment: Fragment, isTransition: Boolean ){
+        val fragmentTransition = activity!!.supportFragmentManager.beginTransaction()
 
-    fun getBitmapFromURL(src: String): Bitmap? {
-        return try {
-            Log.e("src", src)
-            val url = URL(src)
-            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-            connection.setDoInput(true)
-            connection.connect()
-            val input: InputStream = connection.getInputStream()
-            val myBitmap = BitmapFactory.decodeStream(input)
-            Log.e("Bitmap", "returned")
-            myBitmap
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Log.e("Exception", e.toString())
-            null
+        if(isTransition){
+            fragmentTransition.setCustomAnimations(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
+
         }
+        fragmentTransition.replace(R.id.frame_layout, fragment).addToBackStack(fragment.javaClass.simpleName)
+        fragmentTransition.commit()
+
     }
 
 }
