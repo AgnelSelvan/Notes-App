@@ -100,7 +100,7 @@ class CreateNoteFragment : BaseFragment() {
         }
 
         imgMore.setOnClickListener{
-            var noteBottomSheetFragment = NoteBottomSheetFragment.newInstance()
+            var noteBottomSheetFragment = NoteBottomSheetFragment.newInstance(noteId)
             noteBottomSheetFragment.show(requireActivity().supportFragmentManager, "Note Bottom Sheet Fragment")
         }
         okayBtn.setOnClickListener{
@@ -232,6 +232,9 @@ class CreateNoteFragment : BaseFragment() {
                 "WebUrl" -> {
                     layoutWebUrl.visibility = View.VISIBLE
                 }
+                "DeleteNote" -> {
+                    deleteNote()
+                }
                 else -> {
                     layoutWebUrl.visibility = View.VISIBLE
                     selectedColor = intent.getStringExtra("selectedColor")
@@ -241,6 +244,15 @@ class CreateNoteFragment : BaseFragment() {
             }
         }
 
+    }
+
+    private fun deleteNote(){
+        val context: Context = this.requireContext();
+        var db = DatabaseHandler(context)
+        launch {
+            db?.deleteNote(noteId)
+            requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     private fun checkWebUrl(){

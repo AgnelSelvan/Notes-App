@@ -104,9 +104,11 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DB_NAME,
                 arrayOf(notes.id.toString(),))
 
         Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+    }
 
-//        result.close()
-//        db.close()
+    fun deleteNote(id: Int){
+        val db = this.writableDatabase;
+        db.delete(NOTES_TABLE_NAME, ID + "=" + id, null)
     }
 
 }

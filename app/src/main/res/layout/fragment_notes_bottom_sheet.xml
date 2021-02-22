@@ -42,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:src="@drawable/ic_delete"
-            android:id="@+id/layoutDelete"
+            android:id="@+id/imgDelete"
+            android:visibility="gone"
             app:tint="@color/ColorWhite" />
 
     </LinearLayout>
