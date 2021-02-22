@@ -30,34 +30,48 @@
         android:src="@drawable/ic_tick"
         app:tint="@color/ColorWhite" />
 
-    <EditText
+    <LinearLayout
+        android:id="@+id/l0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_10sdp"
-        android:layout_margin="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/imgBack"
+        android:layout_margin="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/note_title"
-        android:maxLines="1"
-        android:inputType="text"
-        android:fontFamily="@font/manrope_regular"
-        android:ellipsize="end"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        android:id="@+id/noteTitle"
-    />
+        >
+
+        <View
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="match_parent"
+            android:id="@+id/colorView"
+            android:background="@color/ColorBlue"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/note_title"
+            android:maxLines="1"
+            android:inputType="text"
+            android:fontFamily="@font/manrope_regular"
+            android:ellipsize="end"
+            android:textColorHint="@color/ColorGray"
+            android:textColor="@color/ColorLightBlack"
+            android:id="@+id/noteTitle"
+            />
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvDateTime"
-        app:layout_constraintTop_toBottomOf="@+id/noteTitle"
+        app:layout_constraintTop_toBottomOf="@+id/l0"
         android:paddingStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/white"
+        android:textColor="@color/ColorYellow"
         android:textSize="@dimen/_8sdp"
         android:fontFamily="@font/manrope_regular"
         />
@@ -76,11 +90,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         >
 
-        <View
-            android:layout_width="@dimen/_5sdp"
-            android:layout_height="match_parent"
-            android:id="@+id/colorView"
-            android:background="@color/ColorBlue"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,8 +100,8 @@
             android:inputType="text"
             android:fontFamily="@font/manrope_regular"
             android:ellipsize="end"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
+            android:textColorHint="@color/ColorGray"
+            android:textColor="@color/ColorLightBlack"
             android:id="@+id/noteSubTitle"
             />
     </LinearLayout>
@@ -111,8 +120,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:ellipsize="end"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
+        android:textColorHint="@color/ColorGray"
+        android:textColor="@color/ColorLightBlack"
         android:id="@+id/noteDesc"
     />
 
@@ -202,8 +211,8 @@
             android:layout_width="@dimen/_24sdp"
             android:layout_height="@dimen/_24sdp"
             android:layout_gravity="center"
-            app:tint="@color/ColorWhite"
-            android:src="@drawable/ic_more"/>
+            app:tint="@color/ColorLightBlack"
+            android:src="@drawable/ic_baseline_expand_less"/>
     </FrameLayout>
 
 
