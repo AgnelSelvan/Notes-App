@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -31,6 +32,17 @@ class MainActivity : AppCompatActivity(){
                 startActivity(dashboardIntent)
             }
         }, 2000)
+
+    }
+    private fun replaceFragment(fragment: Fragment, isTransition: Boolean ){
+        val fragmentTransition = supportFragmentManager.beginTransaction()
+
+        if(isTransition){
+            fragmentTransition.setCustomAnimations(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
+
+        }
+        fragmentTransition.replace(R.id.frame_layout, fragment).addToBackStack(fragment.javaClass.simpleName)
+        fragmentTransition.commit()
 
     }
 }

@@ -1,6 +1,6 @@
 package com.agnelselvan.myapplication
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
@@ -57,7 +57,11 @@ class UserFragment : Fragment() {
         imgLogout.setOnClickListener {
             mAuth.signOut()
             requireActivity().supportFragmentManager.popBackStack()
-
+            var signInIntent = Intent(context, SignInActivity::class.java)
+            startActivity(signInIntent);
+        }
+        imgBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
         tvUserName.setText(user?.displayName)
         tvUserEmail.setText(user?.email)

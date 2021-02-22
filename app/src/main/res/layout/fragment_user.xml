@@ -36,6 +36,7 @@
         android:layout_marginBottom="@dimen/_20sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_baseline_login_24"
         app:tint="#FF0000" />
 
     <LinearLayout
