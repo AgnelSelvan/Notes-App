@@ -11,7 +11,7 @@
         android:id="@+id/notesCardView"
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/ColorLightBlack"
+        app:cardBackgroundColor="#F1F1F1"
         android:layout_margin="@dimen/_5sdp"
         android:padding="@dimen/_5sdp"
         >
@@ -19,19 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_15ssp"
-                android:text="@string/app_name"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingTop="@dimen/_10sdp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:fontFamily="@font/manrope_bold"
-                android:textColor="@color/ColorWhite"/>
+                android:layout_margin="@dimen/_5sdp"
+                android:text="@string/app_name"
+                android:textColor="@color/ColorLightBlack"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintStart_toStartOf="@id/fNote1"
+                app:layout_constraintTop_toTopOf="parent" />
             <TextView
                 android:id="@+id/tvWebUrl"
                 android:layout_width="match_parent"

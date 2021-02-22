@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="ThemeOverlay.search" parent="Theme.MyApplication">
-        <item name="android:editTextColor">@color/ColorWhite</item>
-        <item name="android:textColorHint">@color/ColorLightBlack</item>
+        <item name="android:editTextColor">@color/ColorLightBlack</item>
+        <item name="android:textColorHint">@color/ColorGray</item>
     </style>
 </resources>

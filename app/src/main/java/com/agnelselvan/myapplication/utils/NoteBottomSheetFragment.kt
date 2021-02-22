@@ -14,7 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_notes_bottom_sheet.*
 
 class NoteBottomSheetFragment: BottomSheetDialogFragment() {
-    var selectedColor: String = "#4E33FF"
+    var selectedColor: String = "#606570"
 
     companion object{
         var noteId = -1
@@ -97,7 +97,7 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
             imgNote4.setImageResource(0)
             imgNote5.setImageResource(0)
             imgNote6.setImageResource(0)
-            selectedColor = "#4E33FF"
+            selectedColor = "#6E59FD"
 
             val intent = Intent("bottom_sheet_action")
             intent.putExtra("action", "Blue")
@@ -112,7 +112,7 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
             imgNote4.setImageResource(0)
             imgNote5.setImageResource(0)
             imgNote6.setImageResource(0)
-            selectedColor = "#ffd633"
+            selectedColor = "#FFD333"
 
             val intent = Intent("bottom_sheet_action")
             intent.putExtra("action", "Yellow")
@@ -127,7 +127,7 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
             imgNote4.setImageResource(R.drawable.ic_tick)
             imgNote5.setImageResource(0)
             imgNote6.setImageResource(0)
-            selectedColor = "#ae3b76"
+            selectedColor = "#C2A2FB"
 
             val intent = Intent("bottom_sheet_action")
             intent.putExtra("action", "Purple")
@@ -142,7 +142,7 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
             imgNote4.setImageResource(0)
             imgNote5.setImageResource(R.drawable.ic_tick)
             imgNote6.setImageResource(0)
-            selectedColor = "#0aebaf"
+            selectedColor = "#BAFA70"
 
             val intent = Intent("bottom_sheet_action")
             intent.putExtra("action", "Green")
@@ -157,7 +157,7 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
             imgNote4.setImageResource(0)
             imgNote5.setImageResource(0)
             imgNote6.setImageResource(R.drawable.ic_tick)
-            selectedColor = "#ff7746"
+            selectedColor = "#F38664"
 
             val intent = Intent("bottom_sheet_action")
             intent.putExtra("action", "Orange")

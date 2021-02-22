@@ -1,5 +1,6 @@
 package com.agnelselvan.myapplication
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope
@@ -15,6 +16,7 @@ abstract class BaseFragment : Fragment(), CoroutineScope {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requireActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.ColorGray))
         job = Job()
     }
 
@@ -22,4 +24,5 @@ abstract class BaseFragment : Fragment(), CoroutineScope {
         super.onDestroy()
         job.cancel()
     }
+
 }

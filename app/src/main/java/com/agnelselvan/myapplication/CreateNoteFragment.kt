@@ -27,7 +27,7 @@ import java.util.*
 
 class CreateNoteFragment : BaseFragment() {
     var currentDate: String? = null
-    var selectedColor: String? = "#171C26"
+    var selectedColor: String? = "#F1F1F1"
     private var webUrl = ""
     private var noteId = -1
 
@@ -86,6 +86,8 @@ class CreateNoteFragment : BaseFragment() {
         tvDateTime.text = currentDate
 
         colorView.setBackgroundColor(Color.parseColor(selectedColor))
+        okayBtn.setBackgroundColor(Color.parseColor(selectedColor))
+        cancelBtn.setBackgroundColor(Color.parseColor(selectedColor))
 
         imgDone.setOnClickListener{
             if(noteId != -1){
@@ -209,25 +211,35 @@ class CreateNoteFragment : BaseFragment() {
                 "Blue" -> {
                     selectedColor = intent.getStringExtra("selectedColor")
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                    okayBtn.setBackgroundColor(Color.parseColor(selectedColor))
+                    cancelBtn.setBackgroundColor(Color.parseColor(selectedColor))
                 }
                 "Yellow" -> {
                     selectedColor = intent.getStringExtra("selectedColor")
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                    okayBtn.setBackgroundColor(Color.parseColor(selectedColor))
+                    cancelBtn.setBackgroundColor(Color.parseColor(selectedColor))
                 }
 
                 "Purple" -> {
                     selectedColor = intent.getStringExtra("selectedColor")
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                    okayBtn.setBackgroundColor(Color.parseColor(selectedColor))
+                    cancelBtn.setBackgroundColor(Color.parseColor(selectedColor))
                 }
 
                 "Orange" -> {
                     selectedColor = intent.getStringExtra("selectedColor")
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                    okayBtn.setBackgroundColor(Color.parseColor(selectedColor))
+                    cancelBtn.setBackgroundColor(Color.parseColor(selectedColor))
                 }
 
                 "Green" -> {
                     selectedColor = intent.getStringExtra("selectedColor")
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+                    okayBtn.setBackgroundColor(Color.parseColor(selectedColor))
+                    cancelBtn.setBackgroundColor(Color.parseColor(selectedColor))
                 }
                 "WebUrl" -> {
                     layoutWebUrl.visibility = View.VISIBLE
