@@ -27,7 +27,7 @@ import java.util.*
 
 class CreateNoteFragment : BaseFragment() {
     var currentDate: String? = null
-    var selectedColor: String? = "#F1F1F1"
+    var selectedColor: String? = "#FBFBFB"
     private var webUrl = ""
     private var noteId = -1
 
@@ -86,8 +86,7 @@ class CreateNoteFragment : BaseFragment() {
         tvDateTime.text = currentDate
 
         colorView.setBackgroundColor(Color.parseColor(selectedColor))
-        okayBtn.setBackgroundColor(Color.parseColor(selectedColor))
-        cancelBtn.setBackgroundColor(Color.parseColor(selectedColor))
+
 
         imgDone.setOnClickListener{
             if(noteId != -1){

@@ -14,7 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_notes_bottom_sheet.*
 
 class NoteBottomSheetFragment: BottomSheetDialogFragment() {
-    var selectedColor: String = "#606570"
+    var selectedColor: String = "#FBFBFB"
 
     companion object{
         var noteId = -1
@@ -97,7 +97,7 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
             imgNote4.setImageResource(0)
             imgNote5.setImageResource(0)
             imgNote6.setImageResource(0)
-            selectedColor = "#6E59FD"
+            selectedColor = "#5CCCFF"
 
             val intent = Intent("bottom_sheet_action")
             intent.putExtra("action", "Blue")

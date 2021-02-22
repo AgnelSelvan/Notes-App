@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/notesCardView"
         app:cardCornerRadius="@dimen/_5sdp"
-        app:cardElevation="@dimen/_5sdp"
-        app:cardBackgroundColor="#F1F1F1"
+        app:cardElevation="@dimen/_1sdp"
+        app:cardBackgroundColor="#FBFBFB"
         android:layout_margin="@dimen/_5sdp"
         android:padding="@dimen/_5sdp"
         >

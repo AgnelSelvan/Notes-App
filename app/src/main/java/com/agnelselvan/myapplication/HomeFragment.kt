@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.agnelselvan.myapplication.DB.DatabaseHandler
 import com.agnelselvan.myapplication.Models.Notes
@@ -47,6 +49,12 @@ class HomeFragment : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
         recycler_view.setHasFixedSize(true)
         recycler_view.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//
+//        recycler_view.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int){
+//                recycler_view.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//            }
+//        })
         launch {
             var db = context?.let { DatabaseHandler(it) }
             var notes: ArrayList<Notes>? = db?.readNotes()
@@ -60,6 +68,9 @@ class HomeFragment : BaseFragment(){
         notesAdapter!!.setOnClickListener(onClicked)
         fabBtnCreateNote.setOnClickListener{
             replaceFragment( CreateNoteFragment.newInstance(), false )
+        }
+        imgUser.setOnClickListener{
+            replaceFragment(UserFragment.newInstance(), false)
         }
         searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
